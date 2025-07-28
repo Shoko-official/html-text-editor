@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Article Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Write a New Article</h1>
+        <form id="articleForm" action="/submit-article" method="post">
+            <label for="title">Article Title:</label>
+            <input type="text" id="title" name="article_title" placeholder="Enter your article title" required>
+
+            <label for="subtitle">Subtitle (optional):</label>
+            <input type="text" id="subtitle" name="article_subtitle" placeholder="A catchy subtitle">
+
+            <label>Article Content:</label>
+            <div class="editor-container">
+                <div class="editor-toolbar">
+                    <button type="button" title="Undo (Ctrl+Z)" onclick="undo()" id="undoBtn"><i class="ri-arrow-go-back-line"></i></button>
+                    <button type="button" title="Redo (Ctrl+Y)" onclick="redo()" id="redoBtn"><i class="ri-arrow-go-forward-line"></i></button>
+
+                    <button type="button" title="Bold (Ctrl+B)" onclick="formatDoc('bold')"><i class="ri-bold"></i></button>
+                    <button type="button" title="Italic (Ctrl+I)" onclick="formatDoc('italic')"><i class="ri-italic"></i></button>
+                    <button type="button" title="Underline (Ctrl+U)" onclick="formatDoc('underline')"><i class="ri-underline"></i></button>
+                    <button type="button" title="Strikethrough" onclick="formatDoc('strikeThrough')"><i class="ri-strikethrough"></i></button>
+                    
+                    <div class="select-with-icon" title="Font Size">
+                        <i class="ri-font-size-2"></i>
+                        <select onchange="formatDoc('fontSize', this.value)">
+                            <option value="3">Default Size</option>
+                            <option value="1">Tiny</option>
+                            <option value="2">Small</option>
+                            <option value="4">Medium</option>
+                            <option value="5">Large</option>
+                            <option value="6">Extra Large</option>
+                            <option value="7">Huge</option>
+                        </select>
+                    </div>
+
+                    <select title="Paragraph Format" onchange="formatDoc('formatBlock', this.value)">
+                        <option value="p">Paragraph</option>
+                        <option value="h1">Heading 1</option>
+                        <option value="h2">Heading 2</option>
+                        <option value="h3">Heading 3</option>
+                        <option value="h4">Heading 4</option>
+                        <option value="h5">Heading 5</option>
+                        <option value="h6">Heading 6</option>
+                    </select>
+
+                    <button type="button" title="Align Left" onclick="formatDoc('justifyLeft')"><i class="ri-align-left"></i></button>
+                    <button type="button" title="Center" onclick="formatDoc('justifyCenter')"><i class="ri-align-center"></i></button>
+                    <button type="button" title="Align Right" onclick="formatDoc('justifyRight')"><i class="ri-align-right"></i></button>
+                    <button type="button" title="Justify" onclick="formatDoc('justifyFull')"><i class="ri-align-justify"></i></button>
+
+                    <button type="button" title="Unordered List" onclick="formatDoc('insertUnorderedList')"><i class="ri-list-unordered"></i></button>
+                    <button type="button" title="Ordered List" onclick="formatDoc('insertOrderedList')"><i class="ri-list-ordered"></i></button>
+                    
+                    <button type="button" title="Text Color" onclick="document.getElementById('textColorPicker').click();"><i class="ri-palette-line"></i></button>
+                    <input type="color" id="textColorPicker" title="Text Color" value="#343A40" onchange="formatDoc('forecolor', this.value)" style="width:0; height:0; padding:0; border:0; visibility:hidden;">
+
+                    <button type="button" title="Insert Link" onclick="openLinkModal()"><i class="ri-link"></i></button>
+                    <button type="button" title="Remove Link" onclick="formatDoc('unlink')"><i class="ri-link-unlink"></i></button>
+                    
+                    <button type="button" title="Inline Code" onclick="formatDoc('insertHTML', '<code>' + escapeHtml(getSelectionText()) + '</code>')"><i class="ri-code-s-line"></i></button>
+                    <button type="button" title="Code Block" onclick="insertCodeBlock()"><i class="ri-code-box-line"></i></button>
+
+                    <div class="file-input-wrapper" title="Insert Image">
+                        <i class="ri-image-line"></i>
+                        <input type="file" id="imageInput" accept="image/*" onchange="handleImageInsert(event)">
+                    </div>
+
+                    <button type="button" title="HTML Preview" onclick="openPreviewModal()"><i class="ri-eye-line"></i></button>
+                </div>
+                <div id="editorContent" class="editor-content" contenteditable="true">
+                    <p>Start writing your article here...</p>
+                </div>
+            </div>
+            <div id="wordCount">Words: 0 | Characters: 0</div>
+            <textarea id="articleContentHidden" name="article_content" style="display:none;"></textarea>
+            
+            <input type="submit" value="Publish Article">
+        </form>
+    </div>
+
+    <div id="linkModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeLinkModal()">&times;</span>
+            <h3>Insert/Edit Link</h3>
+            <label for="linkText">Link Text:</label>
+            <input type="text" id="linkText" placeholder="Text to display (leave blank for URL)">
+            <label for="linkUrl">URL:</label>
+            <input type="text" id="linkUrl" placeholder="https://example.com" required>
+            <div class="modal-buttons">
+                <button type="button" class="cancel" onclick="closeLinkModal()">Cancel</button>
+                <button type="button" class="confirm" onclick="applyLink()">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="imageOptionsModal" class="modal">
+        <div class="modal-content image-options-modal">
+            <span class="close-button" onclick="closeImageOptionsModal()">&times;</span>
+            <h3>Image Options</h3>
+            <label for="imageAltText">Alt text:</label>
+            <input type="text" id="imageAltText" placeholder="Image description for accessibility">
+            
+            <label for="imageCaption">Caption:</label>
+            <input type="text" id="imageCaption" placeholder="Caption displayed below the image">
+
+            <label for="imageAlignment">Alignment:</label>
+            <select id="imageAlignment">
+                <option value="none">None (Centered)</option>
+                <option value="left">Left (Text wraps)</option>
+                <option value="right">Right (Text wraps)</option>
+            </select>
+            <div class="modal-buttons">
+                <button type="button" class="cancel" onclick="closeImageOptionsModal()">Cancel</button>
+                <button type="button" class="confirm" onclick="applyImageOptions()">Apply</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="previewModal" class="modal">
+        <div class="modal-content preview-modal">
+            <span class="close-button" onclick="closePreviewModal()">&times;</span>
+            <h3>Article HTML Preview</h3>
+            <textarea id="previewHtmlContent" readonly></textarea>
+            <div class="modal-buttons">
+                <button type="button" class="copy-btn" onclick="copyHtmlToClipboard()"><i class="ri-file-copy-line"></i> Copy HTML</button>
+                <button type="button" class="cancel" onclick="closePreviewModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
