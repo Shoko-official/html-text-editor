@@ -73,7 +73,9 @@ A simple yet powerful rich text editor (WYSIWYG) built entirely with HTML, CSS, 
 │   └── style.css        # All CSS styles for the interface
 │
 └── js/
-    └── script.js        # All JavaScript logic and interactivity
+│   └── script.js        # All JavaScript logic and interactivity
+└── assets/
+    └── ...   
 ```
 
 ---
