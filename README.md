@@ -1,6 +1,5 @@
 # Advanced HTML Text Editor
 
-![HTML Editor Screenshot](https://raw.githubusercontent.com/Shoko-official/html-text-editor/main/assets/editor-preview.png)
 ![HTML Editor Screenshot](https://raw.githubusercontent.com/Shoko-official/html-text-editor/main/assets/filled-editor-preview.png)
 
 A simple yet powerful rich text editor (WYSIWYG) built entirely with HTML, CSS, and JavaScript. Perfect for drafting articles with advanced formatting options, including image management, links, lists, and code blocks.
