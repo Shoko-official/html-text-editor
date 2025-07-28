@@ -1,79 +1,106 @@
-This is an example of an HTML Editor
+# Advanced HTML Text Editor
 
-A simple yet functional rich text editor (WYSIWYG) built entirely with HTML, CSS, and JavaScript. Ideal for drafting articles with advanced formatting options, including image management, links, lists, and code blocks.
+![HTML Editor Screenshot](https://raw.githubusercontent.com/Shoko-official/html-text-editor/main/assets/editor-preview.png)
 
-Features :
+A simple yet powerful rich text editor (WYSIWYG) built entirely with HTML, CSS, and JavaScript. Perfect for drafting articles with advanced formatting options, including image management, links, lists, and code blocks.
 
-    • Complete Text Formatting: Bold, italic, underline, strikethrough.
+---
 
-    • Typography Control: Font size selection and paragraph formats (H1 to H6, Paragraph).
+## 🚩 Features
 
-    • Text Alignment: Left, center, right, justify.
+- **Complete Text Formatting:**  
+  Bold, italic, underline, strikethrough.
 
-    • Lists: Bulleted and numbered lists.
+- **Typography Control:**  
+  Font size selection and paragraph formats (H1–H6, Paragraph).
 
-    • Text Color: Custom text color via a color picker.
+- **Text Alignment:**  
+  Left, center, right, justify.
 
-    • Link Management: Insert and remove hyperlinks with an intuitive modal.
+- **Lists:**  
+  Bulleted and numbered lists.
 
-    • Code Insertion: Support for inline code snippets and <pre><code> blocks.
+- **Text Color:**  
+  Custom text color via a color picker.
 
-    • Advanced Image Handling:
+- **Link Management:**  
+  Insert and remove hyperlinks with an intuitive modal.
 
-        - Image insertion via drag-and-drop or file selection.
+- **Code Insertion:**  
+  Support for inline code snippets and `<pre><code>` blocks.
 
-        - Automatic image compression upon insertion for optimized web performance.
+- **Advanced Image Handling:**
+  - Insert images via drag-and-drop or file selection.
+  - Automatic image compression for optimized performance.
+  - Interactive resizing with aspect ratio lock.
+  - Alignment options (left, right, center) and caption addition with a modal.
 
-        - Interactive resizing with aspect ratio preservation.
+- **History:**  
+  Undo (`Ctrl+Z`) and Redo (`Ctrl+Y`).
 
-        - Alignment options (left, right, center) and caption addition via a dedicated modal.
+- **Counter:**  
+  Real-time word and character count.
 
-    • History: Undo (Ctrl+Z) and Redo (Ctrl+Y) functionalities for worry-free editing.
+- **HTML Preview:**  
+  Preview the generated HTML and easily copy it to the clipboard.
 
-    • Counter: Real-time word and character count display.
+---
 
-    • HTML Preview: Preview the generated HTML code and easily copy it to the clipboard.
+## 🚀 Quick Start
 
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/Shoko-official/html-text-editor.git
+    ```
 
-🚀 Quick Start
+2. **Navigate to the project folder:**
+    ```bash
+    cd html-text-editor
+    ```
 
-To try out this editor, follow these simple steps:
+3. **Open `index.html` in your preferred browser:**  
+   You can double-click `index.html` or use an extension like [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) in VS Code for a local server.
 
-Clone the repository:
+---
 
-git clone https://github.com/your-username/my-advanced-html-editor.git
+## 📁 Project Structure
 
-Navigate to the project folder:
-
-    cd my-advanced-html-editor
-
-    Open the index.html file in your favorite web browser (Google Chrome, Firefox, etc.).
-
-You can also use an extension like "Live Server" for VS Code to launch a local development server.
-
-
-Basic Structure :
-
+```
 /html-text-editor/
-|---index.html          # Main editor structure
-|---css/
-|    |--style.css       # All CSS styles for the interface
-|---js/
-     |--script.js       # All JavaScript logic and interactivity
+│--- index.html          # Main editor structure
+│
+├── css/
+│   └── style.css        # All CSS styles for the interface
+│
+└── js/
+    └── script.js        # All JavaScript logic and interactivity
+```
 
+---
 
-Important Note: Form Submission
+## ⚠️ Important Note: Form Submission
 
-This editor is a pure front-end application. The submission form (<form action="/submit-article" method="post">) is configured to send data to a backend.
+This editor is a **pure front-end application**!  
+The submission form (`<form action="/submit-article" method="post">`) is set to send data to a backend.
 
-For it to actually work and save articles, you will need to implement a server-side API (e.g., with Node.js, Python, PHP, etc...) that will receive and process this data. The path http://127.0.0.1:5500/submit-article is an example target URL for such a backend.
+- To save articles, you must implement a server-side API (Node.js, Python, PHP, etc.) to receive and process the data.
+- The path `http://127.0.0.1:5500/submit-article` is an example target URL.
+- For a quick preview of the generated HTML, use the "HTML Preview" function in the toolbar.
 
-For a quick preview of the generated HTML, use the "HTML Preview" function available in the editor's toolbar.
+---
 
+## 🤝 Contributing
 
-→ Contributing
-Contributions are welcome! If you have ideas for improvement, bug reports, or want to add new features, feel free to open an issue or submit a pull request.
+Contributions are welcome!  
+If you have ideas, bug reports, or want to add features, feel free to open an [issue](https://github.com/Shoko-official/html-text-editor/issues) or submit a pull request.
 
-📄 License
+---
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+> **Tip:**  
+> For best results, use the editor in an up-to-date browser like Chrome or Firefox.
